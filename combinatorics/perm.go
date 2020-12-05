@@ -685,9 +685,144 @@ func PermutationsWithStack8(n, k int, f func([]int)) {
 	}
 }
 
-// PermutationsWithCarrying0 decides the next digit of permutation
+// PermutationsWithCarrying2 decides the next digit of permutation
 // to increment not by a stack or recursive calls but by the previous
 // permutation directly.
+func PermutationsWithCarrying2(n, k int, f func([]int)) {
+	pattern := make([]int, k)
+	for i := 0; i < k; i++ {
+		pattern[i] = i
+	}
+
+	for {
+		f(pattern)
+
+		// increment
+		pos := k - 1 // current digit
+		for pos >= 0 {
+			oldNum := pattern[pos]
+
+			willBreak := false
+			for newNum := oldNum + 1; newNum < n; newNum++ {
+				// skip if the number of `newNum` is used in the left digits
+				willContinue := false
+				for i := 0; i < pos; i++ {
+					if pattern[i] == newNum {
+						willContinue = true
+						break
+					}
+				}
+				if willContinue {
+					continue
+				}
+
+				// increment the value of the current digit
+				pattern[pos] = newNum
+				willBreak = true
+				break
+			}
+			if willBreak {
+				break
+			}
+
+			// if any available number cannot be found, set -1 to the current
+			// digit and carry
+			pattern[pos] = -1
+			pos--
+		}
+		// end of enumerating permutations
+		if pos == -1 {
+			break
+		}
+
+		// replace -1
+		for pos++; pos < k; pos++ {
+			for num := 0; num < k; num++ {
+				// skip if the number of `num` is used in the left digits
+				willContinue := false
+				for i := 0; i < pos; i++ {
+					if pattern[i] == num {
+						willContinue = true
+						break
+					}
+				}
+				if willContinue {
+					continue
+				}
+
+				// replace
+				pattern[pos] = num
+				break
+			}
+		}
+	}
+}
+
+// PermutationsWithCarrying3 records available numbers to an array of bool.
+func PermutationsWithCarrying3(n, k int, f func([]int)) {
+	checklist := make([]bool, n)
+	pattern := make([]int, k)
+	for i := 0; i < k; i++ {
+		pattern[i] = i
+		checklist[i] = true
+	}
+
+	for {
+		f(pattern)
+
+		// increment
+		pos := k - 1 // current digit
+		for pos >= 0 {
+			oldNum := pattern[pos]
+			checklist[oldNum] = false
+
+			willBreak := false
+			for newNum := oldNum + 1; newNum < n; newNum++ {
+				// skip if the number of `newNum` is used
+				if checklist[newNum] {
+					continue
+				}
+
+				// increment the value of the current digit
+				pattern[pos] = newNum
+				checklist[newNum] = true
+				willBreak = true
+				break
+			}
+			if willBreak {
+				break
+			}
+
+			// if any available number cannot be found, set -1 to the current
+			// digit and carry
+			pattern[pos] = -1
+			pos--
+		}
+		// end of enumerating permutations
+		if pos == -1 {
+			break
+		}
+
+		// replace -1
+		for pos++; pos < k; pos++ {
+			for num := 0; num < k; num++ {
+				// skip if the number of `num` is used
+				if checklist[num] {
+					continue
+				}
+
+				// replace
+				pattern[pos] = num
+				checklist[num] = true
+				break
+			}
+		}
+	}
+}
+
+// PermutationsWithCarrying0 integrate the loop for increment and carrying,
+// which goes from right digit to left digit, and the one for setting rest
+// values, which goes from left digit to right digit.
 func PermutationsWithCarrying0(n, k int, f func([]int)) {
 	checklist := make([]bool, n)
 	pattern := make([]int, k)

@@ -194,6 +194,28 @@ func TestPermutations(t *testing.T) {
 					})
 				return got
 			}},
+		{"WithCarrying2",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				PermutationsWithCarrying2(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
+		{"WithCarrying3",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				PermutationsWithCarrying3(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
 		{"WithCarrying0",
 			func(n, k int) [][]int {
 				got := [][]int{}
@@ -405,6 +427,14 @@ func BenchmarkPermutations(b *testing.B) {
 		{"WithStack8",
 			func() {
 				PermutationsWithStack8(n, k, doSomethingForPattern)
+			}},
+		{"WithCarrying2",
+			func() {
+				PermutationsWithCarrying2(n, k, doSomethingForPattern)
+			}},
+		{"WithCarrying3",
+			func() {
+				PermutationsWithCarrying3(n, k, doSomethingForPattern)
 			}},
 		{"WithCarrying0",
 			func() {
