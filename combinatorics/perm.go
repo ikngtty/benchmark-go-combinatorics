@@ -853,55 +853,6 @@ func PermutationsWithCarrying2(n, k int, f func([]int)) {
 			if pos == k-1 {
 				f(pattern)
 			} else {
-				pos++
-			}
-
-			checklist[newNum] = true
-			willContinue = true
-			break
-		}
-		if willContinue {
-			continue
-		}
-
-		pattern[pos] = -1
-		pos--
-	}
-}
-
-// PermutationsWithCarrying3 treats the last digit of permutation specially.
-// It takes only one loop to enumerate permutations which last digit is
-// different though each increment takes a loop.
-func PermutationsWithCarrying3(n, k int, f func([]int)) {
-	checklist := make([]bool, n)
-	pattern := make([]int, k)
-	for i := range pattern {
-		pattern[i] = -1
-	}
-
-	if k == 0 {
-		f(pattern)
-		return
-	}
-
-	pos := 0
-	for pos > -1 {
-		oldNum := pattern[pos]
-		if oldNum > -1 {
-			checklist[oldNum] = false
-		}
-
-		willContinue := false
-		for newNum := oldNum + 1; newNum < n; newNum++ {
-			if checklist[newNum] {
-				continue
-			}
-
-			pattern[pos] = newNum
-
-			if pos == k-1 {
-				f(pattern)
-			} else {
 				checklist[newNum] = true
 				pos++
 				willContinue = true

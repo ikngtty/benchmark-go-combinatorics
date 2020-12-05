@@ -227,17 +227,6 @@ func TestPermutations(t *testing.T) {
 					})
 				return got
 			}},
-		{"WithCarrying3",
-			func(n, k int) [][]int {
-				got := [][]int{}
-				PermutationsWithCarrying3(n, k,
-					func(pattern []int) {
-						patternClone := make([]int, len(pattern))
-						copy(patternClone, pattern)
-						got = append(got, patternClone)
-					})
-				return got
-			}},
 	}
 
 	cases := []struct {
@@ -439,10 +428,6 @@ func BenchmarkPermutations(b *testing.B) {
 		{"WithCarrying2",
 			func() {
 				PermutationsWithCarrying2(n, k, doSomethingForPattern)
-			}},
-		{"WithCarrying3",
-			func() {
-				PermutationsWithCarrying3(n, k, doSomethingForPattern)
 			}},
 	}
 
