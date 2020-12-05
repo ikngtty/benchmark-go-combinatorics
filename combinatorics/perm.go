@@ -685,10 +685,10 @@ func PermutationsWithStack8(n, k int, f func([]int)) {
 	}
 }
 
-// PermutationsWithCarrying2 decides the next digit of permutation
+// PermutationsWithCarrying0 decides the next digit of permutation
 // to increment not by a stack or recursive calls but by the previous
 // permutation directly.
-func PermutationsWithCarrying2(n, k int, f func([]int)) {
+func PermutationsWithCarrying0(n, k int, f func([]int)) {
 	pattern := make([]int, k)
 	for i := 0; i < k; i++ {
 		pattern[i] = i
@@ -758,8 +758,8 @@ func PermutationsWithCarrying2(n, k int, f func([]int)) {
 	}
 }
 
-// PermutationsWithCarrying3 records available numbers to an array of bool.
-func PermutationsWithCarrying3(n, k int, f func([]int)) {
+// PermutationsWithCarrying1 records available numbers to an array of bool.
+func PermutationsWithCarrying1(n, k int, f func([]int)) {
 	checklist := make([]bool, n)
 	pattern := make([]int, k)
 	for i := 0; i < k; i++ {
@@ -820,10 +820,10 @@ func PermutationsWithCarrying3(n, k int, f func([]int)) {
 	}
 }
 
-// PermutationsWithCarrying0 integrate the loop for increment and carrying,
+// PermutationsWithCarrying2 integrate the loop for increment and carrying,
 // which goes from right digit to left digit, and the one for setting rest
 // values, which goes from left digit to right digit.
-func PermutationsWithCarrying0(n, k int, f func([]int)) {
+func PermutationsWithCarrying2(n, k int, f func([]int)) {
 	checklist := make([]bool, n)
 	pattern := make([]int, k)
 	for i := range pattern {
@@ -869,10 +869,10 @@ func PermutationsWithCarrying0(n, k int, f func([]int)) {
 	}
 }
 
-// PermutationsWithCarrying1 treats the last digit of permutation specially.
+// PermutationsWithCarrying3 treats the last digit of permutation specially.
 // It takes only one loop to enumerate permutations which last digit is
 // different though each increment takes a loop.
-func PermutationsWithCarrying1(n, k int, f func([]int)) {
+func PermutationsWithCarrying3(n, k int, f func([]int)) {
 	checklist := make([]bool, n)
 	pattern := make([]int, k)
 	for i := range pattern {
