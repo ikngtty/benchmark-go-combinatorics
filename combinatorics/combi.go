@@ -60,7 +60,7 @@ func CombinationsRecursive2(n, k int, f func([]int)) {
 }
 
 // CombinationsWithCarrying0 decides the next digit of combination
-// to increment not by a recursive calls but by the previous combination
+// to increment not by recursive calls but by the previous combination
 // directly.
 func CombinationsWithCarrying0(n, k int, f func([]int)) {
 	pattern := make([]int, k)
