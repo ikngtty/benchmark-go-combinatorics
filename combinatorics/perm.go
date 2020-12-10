@@ -691,7 +691,7 @@ func PermutationsWithStack8(n, k int, f func([]int)) {
 // permutation directly.
 func PermutationsWithCarrying0(n, k int, f func([]int)) {
 	pattern := make([]int, k)
-	for i := 0; i < k; i++ {
+	for i := range pattern {
 		pattern[i] = i
 	}
 
@@ -762,7 +762,7 @@ func PermutationsWithCarrying0(n, k int, f func([]int)) {
 func PermutationsWithCarrying1(n, k int, f func([]int)) {
 	checklist := make([]bool, n)
 	pattern := make([]int, k)
-	for i := 0; i < k; i++ {
+	for i := range pattern {
 		pattern[i] = i
 		checklist[i] = true
 	}
@@ -825,7 +825,7 @@ func PermutationsWithCarrying1(n, k int, f func([]int)) {
 func PermutationsWithCarrying2(n, k int, f func([]int)) {
 	checklist := make([]bool, n)
 	pattern := make([]int, k)
-	for i := 0; i < k; i++ {
+	for i := range pattern {
 		pattern[i] = i
 		checklist[i] = true
 	}
