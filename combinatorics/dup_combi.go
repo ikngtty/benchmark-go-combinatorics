@@ -69,9 +69,12 @@ func DupCombinationsWithCarrying0(n, k int, f func([]int)) {
 		f(pattern)
 
 		pos := k - 1
-		for pos >= 0 {
-			oldNum := pattern[pos]
+		for {
+			if pos == -1 {
+				return
+			}
 
+			oldNum := pattern[pos]
 			if oldNum == n-1 {
 				// carry
 				pos--
@@ -80,9 +83,6 @@ func DupCombinationsWithCarrying0(n, k int, f func([]int)) {
 
 			// increment
 			pattern[pos]++
-			break
-		}
-		if pos == -1 {
 			break
 		}
 

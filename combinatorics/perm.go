@@ -700,7 +700,11 @@ func PermutationsWithCarrying0(n, k int, f func([]int)) {
 
 		// increment
 		pos := k - 1 // current digit
-		for pos >= 0 {
+		for {
+			if pos == -1 {
+				return
+			}
+
 			oldNum := pattern[pos]
 
 			willBreak := false
@@ -729,10 +733,6 @@ func PermutationsWithCarrying0(n, k int, f func([]int)) {
 			// the case it cannot increment the current digit
 			// -> carry
 			pos--
-		}
-		// end of enumerating permutations
-		if pos == -1 {
-			break
 		}
 
 		// replace the numbers of carried digits
@@ -772,7 +772,11 @@ func PermutationsWithCarrying1(n, k int, f func([]int)) {
 
 		// increment
 		pos := k - 1 // current digit
-		for pos >= 0 {
+		for {
+			if pos == -1 {
+				return
+			}
+
 			oldNum := pattern[pos]
 			checklist[oldNum] = false
 
@@ -796,10 +800,6 @@ func PermutationsWithCarrying1(n, k int, f func([]int)) {
 			// the case it cannot increment the current digit
 			// -> carry
 			pos--
-		}
-		// end of enumerating permutations
-		if pos == -1 {
-			break
 		}
 
 		// replace the numbers of carried digits

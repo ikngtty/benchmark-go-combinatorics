@@ -23,12 +23,12 @@ pkg: github.com/ikngtty/benchmark-go-combinatorics/combinatorics
 BenchmarkCombinations/Recursive0-4         	       1	5270823668 ns/op	5060925400 B/op	70747903 allocs/op
 BenchmarkCombinations/Recursive1-4         	      20	  55564969 ns/op	      96 B/op	       1 allocs/op
 BenchmarkCombinations/Recursive2-4         	      19	  58998589 ns/op	     112 B/op	       1 allocs/op
-BenchmarkCombinations/WithCarrying0-4      	      32	  37560593 ns/op	      96 B/op	       1 allocs/op
+BenchmarkCombinations/WithCarrying0-4      	      31	  36928434 ns/op	      96 B/op	       1 allocs/op
 BenchmarkCombinations/WithCarrying1-4      	      21	  49481598 ns/op	      96 B/op	       1 allocs/op
 BenchmarkDupCombinations/Recursive0-4      	       1	4282572542 ns/op	4187600032 B/op	60615826 allocs/op
 BenchmarkDupCombinations/Recursive1-4      	      24	  47771265 ns/op	      80 B/op	       1 allocs/op
 BenchmarkDupCombinations/Recursive2-4      	      21	  52088408 ns/op	      80 B/op	       1 allocs/op
-BenchmarkDupCombinations/WithCarrying0-4   	      30	  38166760 ns/op	      80 B/op	       1 allocs/op
+BenchmarkDupCombinations/WithCarrying0-4   	      33	  35562403 ns/op	      80 B/op	       1 allocs/op
 BenchmarkDupCombinations/WithCarrying1-4   	      22	  48869797 ns/op	      80 B/op	       1 allocs/op
 BenchmarkPermutations/Recursive0-4         	       1	6338217782 ns/op	5168828928 B/op	89707742 allocs/op
 BenchmarkPermutations/Recursive1-4         	       1	4109722365 ns/op	3087847792 B/op	85046601 allocs/op
@@ -47,7 +47,7 @@ BenchmarkPermutations/WithStack5-4         	       2	 969391196 ns/op	557476872 
 BenchmarkPermutations/WithStack6-4         	       1	1170586330 ns/op	315651632 B/op	 9864109 allocs/op
 BenchmarkPermutations/WithStack7-4         	       1	1766143475 ns/op	946954664 B/op	29592321 allocs/op
 BenchmarkPermutations/WithStack8-4         	       1	3088975270 ns/op	1420431936 B/op	59184625 allocs/op
-BenchmarkPermutations/WithCarrying0-4      	       2	 581082500 ns/op	      80 B/op	       1 allocs/op
-BenchmarkPermutations/WithCarrying1-4      	       7	 143919992 ns/op	      96 B/op	       2 allocs/op
+BenchmarkPermutations/WithCarrying0-4      	       2	 602414196 ns/op	      80 B/op	       1 allocs/op
+BenchmarkPermutations/WithCarrying1-4      	       7	 149944171 ns/op	      96 B/op	       2 allocs/op
 BenchmarkPermutations/WithCarrying2-4      	       6	 170103707 ns/op	      96 B/op	       2 allocs/op
 ```
