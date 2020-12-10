@@ -20,6 +20,11 @@ docker run -i --rm -v $(pwd):/go/src/github.com/ikngtty/benchmark-go-combinatori
 goos: darwin
 goarch: amd64
 pkg: github.com/ikngtty/benchmark-go-combinatorics/combinatorics
+BenchmarkCombinations/Recursive0-4         	       1	5270823668 ns/op	5060925400 B/op	70747903 allocs/op
+BenchmarkCombinations/Recursive1-4         	      20	  55564969 ns/op	      96 B/op	       1 allocs/op
+BenchmarkCombinations/Recursive2-4         	      19	  58998589 ns/op	     112 B/op	       1 allocs/op
+BenchmarkCombinations/WithCarrying0-4      	      32	  37560593 ns/op	      96 B/op	       1 allocs/op
+BenchmarkCombinations/WithCarrying1-4      	      21	  49481598 ns/op	      96 B/op	       1 allocs/op
 BenchmarkPermutations/Recursive0-4         	       1	6338217782 ns/op	5168828928 B/op	89707742 allocs/op
 BenchmarkPermutations/Recursive1-4         	       1	4109722365 ns/op	3087847792 B/op	85046601 allocs/op
 BenchmarkPermutations/Recursive2-4         	       1	3807560486 ns/op	2581434768 B/op	91281958 allocs/op
