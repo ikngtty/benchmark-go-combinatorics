@@ -26,6 +26,17 @@ func TestDupPermutations(t *testing.T) {
 					})
 				return got
 			}},
+		{"WithStack0",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				DupPermutationsWithStack0(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
 		{"WithCarrying0",
 			func(n, k int) [][]int {
 				got := [][]int{}
@@ -163,6 +174,10 @@ func BenchmarkDupPermutations(b *testing.B) {
 		{"Recursive1",
 			func() {
 				DupPermutationsRecursive1(n, k, doSomethingForPattern)
+			}},
+		{"WithStack0",
+			func() {
+				DupPermutationsWithStack0(n, k, doSomethingForPattern)
 			}},
 		{"WithCarrying0",
 			func() {

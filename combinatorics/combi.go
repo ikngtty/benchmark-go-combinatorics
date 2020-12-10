@@ -59,6 +59,33 @@ func CombinationsRecursive2(n, k int, f func([]int)) {
 	body(1)
 }
 
+// CombinationsWithStack0 stores nodes of permutations in a stack.
+func CombinationsWithStack0(n, k int, f func([]int)) {
+	patternNodeStack := newPatternNodeStack3()
+	pattern := make([]int, k)
+
+	patternNodeStack.push(patternNode3{pos: -1, number: -1})
+	for !patternNodeStack.empty() {
+		patternNode := patternNodeStack.pop()
+
+		if patternNode.pos > -1 {
+			pattern[patternNode.pos] = patternNode.number
+		}
+
+		if patternNode.pos == k-1 {
+			f(pattern)
+			continue
+		}
+
+		for num := n + patternNode.pos - k + 1; num >= patternNode.number+1; num-- {
+			childNode := patternNode3{
+				pos: patternNode.pos + 1, number: num,
+			}
+			patternNodeStack.push(childNode)
+		}
+	}
+}
+
 // CombinationsWithCarrying0 decides the next digit of combination
 // to increment not by recursive calls but by the previous combination
 // directly.

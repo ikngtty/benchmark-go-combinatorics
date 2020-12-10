@@ -59,6 +59,33 @@ func DupCombinationsRecursive2(n, k int, f func([]int)) {
 	body(1)
 }
 
+// DupCombinationsWithStack0 stores nodes of permutations in a stack.
+func DupCombinationsWithStack0(n, k int, f func([]int)) {
+	patternNodeStack := newPatternNodeStack3()
+	pattern := make([]int, k)
+
+	patternNodeStack.push(patternNode3{pos: -1, number: 0})
+	for !patternNodeStack.empty() {
+		patternNode := patternNodeStack.pop()
+
+		if patternNode.pos > -1 {
+			pattern[patternNode.pos] = patternNode.number
+		}
+
+		if patternNode.pos == k-1 {
+			f(pattern)
+			continue
+		}
+
+		for num := n - 1; num >= patternNode.number; num-- {
+			childNode := patternNode3{
+				pos: patternNode.pos + 1, number: num,
+			}
+			patternNodeStack.push(childNode)
+		}
+	}
+}
+
 // DupCombinationsWithCarrying0 decides the next digit of combination
 // to increment not by recursive calls but by the previous combination
 // directly.
