@@ -278,7 +278,8 @@ func PermutationsWithStack0(n, k int, f func([]int)) {
 			continue
 		}
 
-		// remove the stack item if it cannot increment the digit
+		// the case it cannot increment the digit
+		// -> remove the stack item
 		callStack.pop()
 	}
 }
@@ -332,8 +333,8 @@ func PermutationsWithStack1(n, k int, f func([]int)) {
 			continue
 		}
 
-		// reset the digit of `pattern` and remove the stack item if it cannot
-		// increment the digit
+		// the case it cannot increment the digit
+		// -> reset the digit of `pattern` and remove the stack item
 		pattern[pos] = -1
 		posStack.Pop()
 	}
@@ -725,8 +726,8 @@ func PermutationsWithCarrying0(n, k int, f func([]int)) {
 				break
 			}
 
-			// if any available number cannot be found, set -1 to the current
-			// digit and carry
+			// the case it cannot increment the current digit
+			// -> set -1 to the current digit and carry
 			pattern[pos] = -1
 			pos--
 		}
@@ -735,7 +736,7 @@ func PermutationsWithCarrying0(n, k int, f func([]int)) {
 			break
 		}
 
-		// replace -1
+		// replace the numbers of carried digits
 		for pos++; pos < k; pos++ {
 			for num := 0; num < k; num++ {
 				// skip if the number of `num` is used in the left digits
@@ -793,8 +794,8 @@ func PermutationsWithCarrying1(n, k int, f func([]int)) {
 				break
 			}
 
-			// if any available number cannot be found, set -1 to the current
-			// digit and carry
+			// the case it cannot increment the current digit
+			// -> set -1 to the current digit and carry
 			pattern[pos] = -1
 			pos--
 		}
@@ -803,7 +804,7 @@ func PermutationsWithCarrying1(n, k int, f func([]int)) {
 			break
 		}
 
-		// replace -1
+		// replace the numbers of carried digits
 		for pos++; pos < k; pos++ {
 			for num := 0; num < k; num++ {
 				// skip if the number of `num` is used
