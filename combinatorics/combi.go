@@ -96,7 +96,7 @@ func CombinationsWithCarrying0(n, k int, f func([]int)) {
 	}
 }
 
-// CombinationsWithCarrying1 integrate the loop for increment and carrying,
+// CombinationsWithCarrying1 integrates the loop for increment and carrying,
 // which goes from right digit to left digit, and the one for setting rest
 // values, which goes from left digit to right digit.
 func CombinationsWithCarrying1(n, k int, f func([]int)) {

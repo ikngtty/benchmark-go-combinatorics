@@ -94,7 +94,7 @@ func DupCombinationsWithCarrying0(n, k int, f func([]int)) {
 	}
 }
 
-// DupCombinationsWithCarrying1 integrate the loop for increment and carrying,
+// DupCombinationsWithCarrying1 integrates the loop for increment and carrying,
 // which goes from right digit to left digit, and the one for setting rest
 // values, which goes from left digit to right digit.
 func DupCombinationsWithCarrying1(n, k int, f func([]int)) {

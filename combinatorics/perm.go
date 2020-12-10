@@ -819,7 +819,7 @@ func PermutationsWithCarrying1(n, k int, f func([]int)) {
 	}
 }
 
-// PermutationsWithCarrying2 integrate the loop for increment and carrying,
+// PermutationsWithCarrying2 integrates the loop for increment and carrying,
 // which goes from right digit to left digit, and the one for setting rest
 // values, which goes from left digit to right digit.
 func PermutationsWithCarrying2(n, k int, f func([]int)) {
