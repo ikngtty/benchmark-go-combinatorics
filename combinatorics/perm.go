@@ -727,8 +727,7 @@ func PermutationsWithCarrying0(n, k int, f func([]int)) {
 			}
 
 			// the case it cannot increment the current digit
-			// -> set -1 to the current digit and carry
-			pattern[pos] = -1
+			// -> carry
 			pos--
 		}
 		// end of enumerating permutations
@@ -795,8 +794,7 @@ func PermutationsWithCarrying1(n, k int, f func([]int)) {
 			}
 
 			// the case it cannot increment the current digit
-			// -> set -1 to the current digit and carry
-			pattern[pos] = -1
+			// -> carry
 			pos--
 		}
 		// end of enumerating permutations
