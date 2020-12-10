@@ -825,17 +825,19 @@ func PermutationsWithCarrying1(n, k int, f func([]int)) {
 func PermutationsWithCarrying2(n, k int, f func([]int)) {
 	checklist := make([]bool, n)
 	pattern := make([]int, k)
-	for i := range pattern {
-		pattern[i] = -1
+	for i := 0; i < k; i++ {
+		pattern[i] = i
+		checklist[i] = true
 	}
 
-	if k == 0 {
-		f(pattern)
-		return
-	}
-
-	pos := 0
+	pos := k
 	for pos > -1 {
+		if pos == k {
+			f(pattern)
+			pos--
+			continue
+		}
+
 		oldNum := pattern[pos]
 		if oldNum > -1 {
 			checklist[oldNum] = false
@@ -848,20 +850,16 @@ func PermutationsWithCarrying2(n, k int, f func([]int)) {
 			}
 
 			pattern[pos] = newNum
-
-			if pos == k-1 {
-				f(pattern)
-			} else {
-				checklist[newNum] = true
-				pos++
-				willContinue = true
-				break
-			}
+			checklist[newNum] = true
+			pos++
+			willContinue = true
+			break
 		}
 		if willContinue {
 			continue
 		}
 
+		// carry
 		pattern[pos] = -1
 		pos--
 	}
