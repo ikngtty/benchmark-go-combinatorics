@@ -148,3 +148,18 @@ func DupPermutationsWithCarrying1(n, k int, f func([]int)) {
 		pos = k
 	}
 }
+
+// DupPermutationsWithBaseConverting0 converts a decimal number to a base-n
+// number.
+func DupPermutationsWithBaseConverting0(n, k int, f func([]int)) {
+	pattern := make([]int, k)
+
+	for deciNum := 0; deciNum < Pow(n, k); deciNum++ {
+		rest := deciNum
+		for pos := k - 1; pos >= 0; pos-- {
+			pattern[pos] = rest % n
+			rest /= n
+		}
+		f(pattern)
+	}
+}

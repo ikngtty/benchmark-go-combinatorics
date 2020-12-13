@@ -1,5 +1,14 @@
 package combinatorics
 
+// Pow ...
+func Pow(base, exponent int) int {
+	answer := 1
+	for i := 0; i < exponent; i++ {
+		answer *= base
+	}
+	return answer
+}
+
 // IntList ...
 type IntList struct {
 	first *intListNode

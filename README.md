@@ -40,6 +40,7 @@ BenchmarkDupPermutations/WithStack0-4      	       8	 136736002 ns/op	76696018 B
 BenchmarkDupPermutations/WithSlice0-4      	      46	  23043210 ns/op	    2080 B/op	       7 allocs/op
 BenchmarkDupPermutations/WithCarrying0-4   	      74	  15678811 ns/op	      64 B/op	       1 allocs/op
 BenchmarkDupPermutations/WithCarrying1-4   	      51	  22888059 ns/op	      64 B/op	       1 allocs/op
+BenchmarkDupPermutations/WithBaseConverting0-4     5	 232745482 ns/op	      64 B/op	       1 allocs/op
 BenchmarkPermutations/Recursive0-4         	       1	6338217782 ns/op	5168828928 B/op	89707742 allocs/op
 BenchmarkPermutations/Recursive1-4         	       1	4109722365 ns/op	3087847792 B/op	85046601 allocs/op
 BenchmarkPermutations/Recursive2-4         	       1	3807560486 ns/op	2581434768 B/op	91281958 allocs/op

@@ -70,6 +70,17 @@ func TestDupPermutations(t *testing.T) {
 					})
 				return got
 			}},
+		{"WithBaseConverting0",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				DupPermutationsWithBaseConverting0(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
 	}
 
 	cases := []struct {
@@ -201,6 +212,10 @@ func BenchmarkDupPermutations(b *testing.B) {
 		{"WithCarrying1",
 			func() {
 				DupPermutationsWithCarrying1(n, k, doSomethingForPattern)
+			}},
+		{"WithBaseConverting0",
+			func() {
+				DupPermutationsWithBaseConverting0(n, k, doSomethingForPattern)
 			}},
 	}
 
