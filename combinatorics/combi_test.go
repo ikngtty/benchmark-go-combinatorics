@@ -48,6 +48,17 @@ func TestCombinations(t *testing.T) {
 					})
 				return got
 			}},
+		{"WithSlice0",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				CombinationsWithSlice0(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
 		{"WithCarrying0",
 			func(n, k int) [][]int {
 				got := [][]int{}
@@ -150,6 +161,10 @@ func BenchmarkCombinations(b *testing.B) {
 		{"WithStack0",
 			func() {
 				CombinationsWithStack0(n, k, doSomethingForPattern)
+			}},
+		{"WithSlice0",
+			func() {
+				CombinationsWithSlice0(n, k, doSomethingForPattern)
 			}},
 		{"WithCarrying0",
 			func() {

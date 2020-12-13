@@ -86,6 +86,35 @@ func CombinationsWithStack0(n, k int, f func([]int)) {
 	}
 }
 
+// CombinationsWithSlice0 bases on CombinationsWithStack0, but the stack
+// is implemented with a slice, not with a pointer.
+func CombinationsWithSlice0(n, k int, f func([]int)) {
+	patternNodeStack := make([]patternNode3, 1)
+	pattern := make([]int, k)
+
+	patternNodeStack[0] = patternNode3{pos: -1, number: -1}
+	for len(patternNodeStack) > 0 {
+		patternNode := patternNodeStack[len(patternNodeStack)-1]      // pop(peek)
+		patternNodeStack = patternNodeStack[:len(patternNodeStack)-1] // pop(discard)
+
+		if patternNode.pos > -1 {
+			pattern[patternNode.pos] = patternNode.number
+		}
+
+		if patternNode.pos == k-1 {
+			f(pattern)
+			continue
+		}
+
+		for num := n + patternNode.pos - k + 1; num >= patternNode.number+1; num-- {
+			childNode := patternNode3{
+				pos: patternNode.pos + 1, number: num,
+			}
+			patternNodeStack = append(patternNodeStack, childNode) // push
+		}
+	}
+}
+
 // CombinationsWithCarrying0 decides the next digit of combination
 // to increment not by recursive calls but by the previous combination
 // directly.

@@ -48,6 +48,17 @@ func TestDupCombinations(t *testing.T) {
 					})
 				return got
 			}},
+		{"WithSlice0",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				DupCombinationsWithSlice0(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
 		{"WithCarrying0",
 			func(n, k int) [][]int {
 				got := [][]int{}
@@ -176,6 +187,10 @@ func BenchmarkDupCombinations(b *testing.B) {
 		{"WithStack0",
 			func() {
 				DupCombinationsWithStack0(n, k, doSomethingForPattern)
+			}},
+		{"WithSlice0",
+			func() {
+				DupCombinationsWithSlice0(n, k, doSomethingForPattern)
 			}},
 		{"WithCarrying0",
 			func() {
