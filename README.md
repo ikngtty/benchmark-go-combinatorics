@@ -54,6 +54,14 @@ BenchmarkPermutations/WithStack5-4         	       2	 969391196 ns/op	557476872 
 BenchmarkPermutations/WithStack6-4         	       1	1170586330 ns/op	315651632 B/op	 9864109 allocs/op
 BenchmarkPermutations/WithStack7-4         	       1	1766143475 ns/op	946954664 B/op	29592321 allocs/op
 BenchmarkPermutations/WithStack8-4         	       1	3088975270 ns/op	1420431936 B/op	59184625 allocs/op
+BenchmarkPermutations/WithSlice0-4         	       5	 234075281 ns/op	     576 B/op	       6 allocs/op
+BenchmarkPermutations/WithSlice1-4         	       6	 184274404 ns/op	     336 B/op	       6 allocs/op
+BenchmarkPermutations/WithSlice2-4         	       6	 186323035 ns/op	    2112 B/op	       8 allocs/op
+BenchmarkPermutations/WithSlice4-4         	       6	 183515108 ns/op	    2496 B/op	       6 allocs/op
+BenchmarkPermutations/WithSlice5-4         	       3	 360493641 ns/op	84004413 B/op	 6235310 allocs/op
+BenchmarkPermutations/WithSlice6-4         	       2	 657643570 ns/op	    2096 B/op	       7 allocs/op
+BenchmarkPermutations/WithSlice7-4         	       6	 183175502 ns/op	    9504 B/op	       9 allocs/op
+BenchmarkPermutations/WithSlice8-4         	       1	2023963760 ns/op	946958520 B/op	29592322 allocs/op
 BenchmarkPermutations/WithCarrying0-4      	       2	 602414196 ns/op	      80 B/op	       1 allocs/op
 BenchmarkPermutations/WithCarrying1-4      	       7	 149944171 ns/op	      96 B/op	       2 allocs/op
 BenchmarkPermutations/WithCarrying2-4      	       6	 170103707 ns/op	      96 B/op	       2 allocs/op

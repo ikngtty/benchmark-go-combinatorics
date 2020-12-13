@@ -194,6 +194,99 @@ func TestPermutations(t *testing.T) {
 					})
 				return got
 			}},
+		{"WithSlice0",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				PermutationsWithSlice0(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
+		{"WithSlice1",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				PermutationsWithSlice1(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
+		{"WithSlice2",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				PermutationsWithSlice2(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
+		{"WithSlice4",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				PermutationsWithSlice4(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
+		{"WithSlice5",
+			func(n, k int) [][]int {
+				a := make([]int, n)
+				for i := 0; i < n; i++ {
+					a[i] = i
+				}
+
+				got := [][]int{}
+				PermutationsWithSlice5(a, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
+		{"WithSlice6",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				PermutationsWithSlice6(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
+		{"WithSlice7",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				PermutationsWithSlice7(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
+		{"WithSlice8",
+			func(n, k int) [][]int {
+				got := [][]int{}
+				PermutationsWithSlice8(n, k,
+					func(pattern []int) {
+						patternClone := make([]int, len(pattern))
+						copy(patternClone, pattern)
+						got = append(got, patternClone)
+					})
+				return got
+			}},
 		{"WithCarrying0",
 			func(n, k int) [][]int {
 				got := [][]int{}
@@ -416,6 +509,42 @@ func BenchmarkPermutations(b *testing.B) {
 		{"WithStack8",
 			func() {
 				PermutationsWithStack8(n, k, doSomethingForPattern)
+			}},
+		{"WithSlice0",
+			func() {
+				PermutationsWithSlice0(n, k, doSomethingForPattern)
+			}},
+		{"WithSlice1",
+			func() {
+				PermutationsWithSlice1(n, k, doSomethingForPattern)
+			}},
+		{"WithSlice2",
+			func() {
+				PermutationsWithSlice2(n, k, doSomethingForPattern)
+			}},
+		{"WithSlice4",
+			func() {
+				PermutationsWithSlice4(n, k, doSomethingForPattern)
+			}},
+		{"WithSlice5",
+			func() {
+				a := make([]int, n)
+				for i := 0; i < n; i++ {
+					a[i] = i
+				}
+				PermutationsWithSlice5(a, k, doSomethingForPattern)
+			}},
+		{"WithSlice6",
+			func() {
+				PermutationsWithSlice6(n, k, doSomethingForPattern)
+			}},
+		{"WithSlice7",
+			func() {
+				PermutationsWithSlice7(n, k, doSomethingForPattern)
+			}},
+		{"WithSlice8",
+			func() {
+				PermutationsWithSlice8(n, k, doSomethingForPattern)
 			}},
 		{"WithCarrying0",
 			func() {

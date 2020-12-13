@@ -686,6 +686,417 @@ func PermutationsWithStack8(n, k int, f func([]int)) {
 	}
 }
 
+// PermutationsWithSlice0 bases on PermutationsWithStack0, but the stack
+// is implemented with a slice, not with a pointer.
+func PermutationsWithSlice0(n, k int, f func([]int)) {
+	checklist := make([]bool, n)
+	callStack := make([]callStackItem0, 1)
+	pattern := make([]int, k)
+
+	callStack[0] = callStackItem0{pos: 0, chosenNumber: -1}
+	for len(callStack) > 0 {
+		env := &callStack[len(callStack)-1] // peek
+
+		// at the most right digit, call back the function
+		if env.pos == k {
+			f(pattern)
+
+			callStack = callStack[:len(callStack)-1] // pop(discard)
+			continue
+		}
+
+		// reset the digit of `checklist` before increment the digit
+		if env.chosenNumber > -1 {
+			checklist[env.chosenNumber] = false
+		}
+
+		// increment the digit
+		willContinue := false
+		for env.chosenNumber++; env.chosenNumber < n; env.chosenNumber++ {
+			// skip if the number of `env.chosenNumber` is used
+			if checklist[env.chosenNumber] {
+				continue
+			}
+
+			// fill the number
+			pattern[env.pos] = env.chosenNumber
+			checklist[env.chosenNumber] = true
+
+			// push a stack item for the right digit
+			newEnv := callStackItem0{
+				pos: env.pos + 1, chosenNumber: -1,
+			}
+			callStack = append(callStack, newEnv) // push
+			willContinue = true
+			break
+		}
+		if willContinue {
+			continue
+		}
+
+		// the case it cannot increment the digit
+		// -> remove the stack item
+		callStack = callStack[:len(callStack)-1] // pop(discard)
+	}
+}
+
+// PermutationsWithSlice1 bases on PermutationsWithStack1. Omitted below.
+func PermutationsWithSlice1(n, k int, f func([]int)) {
+	checklist := make([]bool, n)
+	posStack := make([]int, 1)
+	pattern := make([]int, k)
+	for i := range pattern {
+		pattern[i] = -1
+	}
+
+	posStack[0] = 0
+	for len(posStack) > 0 {
+		pos := posStack[len(posStack)-1] // peek
+
+		// at the most right digit, call back the function
+		if pos == k {
+			f(pattern)
+
+			posStack = posStack[:len(posStack)-1] // pop(discard)
+			continue
+		}
+
+		// reset the digit of `checklist` before increment the digit
+		chosenNumber := pattern[pos]
+		if chosenNumber > -1 {
+			checklist[chosenNumber] = false
+		}
+
+		// increment the digit
+		willContinue := false
+		for chosenNumber++; chosenNumber < n; chosenNumber++ {
+			// skip if the number of `chosenNumber` is used
+			if checklist[chosenNumber] {
+				continue
+			}
+
+			// fill the number
+			pattern[pos] = chosenNumber
+			checklist[chosenNumber] = true
+
+			// push a stack item for the right digit
+			posStack = append(posStack, pos+1) // push
+			willContinue = true
+			break
+		}
+		if willContinue {
+			continue
+		}
+
+		// the case it cannot increment the digit
+		// -> reset the digit of `pattern` and remove the stack item
+		pattern[pos] = -1
+		posStack = posStack[:len(posStack)-1] // pop(discard)
+	}
+}
+
+// PermutationsWithSlice2 bases on PermutationsWithStack2, 3. Omitted below.
+func PermutationsWithSlice2(n, k int, f func([]int)) {
+	checklist := make([]bool, n)
+	patternNodeStack := make([]patternNode2, 1)
+	pattern := make([]int, k)
+
+	patternNodeStack[0] = patternNode2{pos: -1, number: 0}
+	for len(patternNodeStack) > 0 {
+		patternNode := patternNodeStack[len(patternNodeStack)-1]      // pop(peek)
+		patternNodeStack = patternNodeStack[:len(patternNodeStack)-1] // pop(discard)
+
+		// reset the right digits of `checklist` and `pattern`
+		for i := patternNode.pos; i < k; i++ {
+			if i > -1 && pattern[i] > -1 {
+				checklist[pattern[i]] = false
+				pattern[i] = -1
+			}
+		}
+
+		// fill the number
+		if patternNode.pos > -1 {
+			pattern[patternNode.pos] = patternNode.number
+			checklist[patternNode.number] = true
+		}
+
+		// at the most right digit, call back the function
+		if patternNode.pos == k-1 {
+			f(pattern)
+			continue
+		}
+
+		// enumerate the numbers of the right digit
+		for num := n - 1; num >= 0; num-- {
+			// skip if the number of `num` is used
+			if checklist[num] {
+				continue
+			}
+
+			// push a stack item for the right digit
+			childNode := patternNode2{
+				pos: patternNode.pos + 1, number: num,
+			}
+			patternNodeStack = append(patternNodeStack, childNode) // push
+		}
+	}
+}
+
+// PermutationsWithSlice4 bases on PermutationsWithStack4. Omitted below.
+func PermutationsWithSlice4(n, k int, f func([]int)) {
+	checklist := make([]bool, n)
+	pattern := make([]int, k)
+
+	if k == 0 {
+		f(pattern)
+		return
+	}
+
+	patternNodeStack := make([]patternNode3, n)
+	for num := 0; num < n; num++ {
+		patternNodeStack[n-1-num] = patternNode3{pos: 0, number: num}
+	}
+
+	for len(patternNodeStack) > 0 {
+		patternNode := patternNodeStack[len(patternNodeStack)-1]      // pop(peek)
+		patternNodeStack = patternNodeStack[:len(patternNodeStack)-1] // pop(discard)
+
+		// reset the right digits of `checklist` and `pattern`
+		for i := patternNode.pos; i < k; i++ {
+			if pattern[i] > -1 {
+				checklist[pattern[i]] = false
+				pattern[i] = -1
+			}
+		}
+
+		// fill the number
+		pattern[patternNode.pos] = patternNode.number
+		checklist[patternNode.number] = true
+
+		// at the most right digit, call back the function
+		if patternNode.pos == k-1 {
+			f(pattern)
+			continue
+		}
+
+		// enumerate the numbers of the right digit
+		for num := n - 1; num >= 0; num-- {
+			// skip if the number of `num` is used
+			if checklist[num] {
+				continue
+			}
+
+			// push a stack item for the right digit
+			childNode := patternNode3{
+				pos: patternNode.pos + 1, number: num,
+			}
+			patternNodeStack = append(patternNodeStack, childNode) // push
+		}
+	}
+}
+
+// PermutationsWithSlice5 bases on PermutationsWithStack5. Omitted below.
+func PermutationsWithSlice5(a []int, k int, f func([]int)) {
+	patternNodeStack := make([]patternNode5, 1)
+	pattern := make([]int, k)
+
+	patternNodeStack[0] = patternNode5{pos: -1, number: 0, rest: a}
+	for len(patternNodeStack) > 0 {
+		patternNode := patternNodeStack[len(patternNodeStack)-1]      // pop(peek)
+		patternNodeStack = patternNodeStack[:len(patternNodeStack)-1] // pop(discard)
+
+		// fill the number
+		if patternNode.pos > -1 {
+			pattern[patternNode.pos] = patternNode.number
+		}
+
+		// at the most right digit, call back the function
+		if patternNode.pos == k-1 {
+			f(pattern)
+			continue
+		}
+
+		// enumerate the numbers of the right digit
+		for i := len(patternNode.rest) - 1; i >= 0; i-- {
+			// make a new array without i-th item
+			newRest := make([]int, len(patternNode.rest)-1)
+			for j := 0; j < i; j++ {
+				newRest[j] = patternNode.rest[j]
+			}
+			for j := i + 1; j < len(patternNode.rest); j++ {
+				newRest[j-1] = patternNode.rest[j]
+			}
+
+			// push a stack item for the right digit
+			childNode := patternNode5{
+				pos:    patternNode.pos + 1,
+				number: patternNode.rest[i],
+				rest:   newRest,
+			}
+			patternNodeStack = append(patternNodeStack, childNode) // push
+		}
+	}
+}
+
+// PermutationsWithSlice6 bases on PermutationsWithStack6. Omitted below.
+func PermutationsWithSlice6(n, k int, f func([]int)) {
+	patternNodeStack := make([]patternNode3, 1)
+	pattern := make([]int, k)
+
+	patternNodeStack[0] = patternNode3{pos: -1, number: 0}
+	for len(patternNodeStack) > 0 {
+		patternNode := patternNodeStack[len(patternNodeStack)-1]      // pop(peek)
+		patternNodeStack = patternNodeStack[:len(patternNodeStack)-1] // pop(discard)
+
+		// fill the number
+		if patternNode.pos > -1 {
+			pattern[patternNode.pos] = patternNode.number
+		}
+
+		// at the most right digit, call back the function
+		if patternNode.pos == k-1 {
+			f(pattern)
+			continue
+		}
+
+		// enumerate the numbers of the right digit
+		for num := n - 1; num >= 0; num-- {
+			// skip if the number of `num` is used in the left digits
+			willContinue := false
+			for i := 0; i <= patternNode.pos; i++ {
+				if pattern[i] == num {
+					willContinue = true
+					break
+				}
+			}
+			if willContinue {
+				continue
+			}
+
+			// push a stack item for the right digit
+			childNode := patternNode3{
+				pos: patternNode.pos + 1, number: num,
+			}
+			patternNodeStack = append(patternNodeStack, childNode) // push
+		}
+	}
+}
+
+// PermutationsWithSlice7 bases on PermutationsWithStack7. Omitted below.
+func PermutationsWithSlice7(n, k int, f func([]int)) {
+	checklist := make([]bool, n)
+	operationStack := make([]operation7, 1)
+	pattern := make([]int, k)
+
+	operationStack[0] = operation7{
+		pos:    -1,
+		number: 0,
+		mode:   operationMode7ExecuteOrDelegate,
+	}
+	for len(operationStack) > 0 {
+		operation := operationStack[len(operationStack)-1]      // pop(peek)
+		operationStack = operationStack[:len(operationStack)-1] // pop(discard)
+
+		switch operation.mode {
+		case operationMode7ReflectValue:
+			// fill the number
+			pattern[operation.pos] = operation.number
+			checklist[operation.number] = true
+
+		case operationMode7ExecuteOrDelegate:
+			if operation.pos == k-1 {
+				// at the most right digit, call back the function
+				f(pattern)
+			} else {
+				// enumerate the numbers of the right digit
+				for num := n - 1; num >= 0; num-- {
+					// skip if the number of `num` is used
+					if checklist[num] {
+						continue
+					}
+
+					// push stack items for the right digit
+					operationStack = append(operationStack,
+						operation7{
+							pos:    operation.pos + 1,
+							number: num,
+							mode:   operationMode7ResetValue,
+						},
+						operation7{
+							pos:    operation.pos + 1,
+							number: num,
+							mode:   operationMode7ExecuteOrDelegate,
+						},
+						operation7{
+							pos:    operation.pos + 1,
+							number: num,
+							mode:   operationMode7ReflectValue,
+						}) // push
+				}
+			}
+
+		case operationMode7ResetValue:
+			// reset the digit of `checklist`
+			checklist[operation.number] = false
+		}
+	}
+}
+
+// PermutationsWithSlice8 bases on PermutationsWithStack8. Omitted below.
+func PermutationsWithSlice8(n, k int, f func([]int)) {
+	checklist := make([]bool, n)
+	operationStack := make([]func(), 1)
+	pattern := make([]int, k)
+
+	reflectValue := func(pos, number int) {
+		// fill the number
+		pattern[pos] = number
+		checklist[number] = true
+	}
+	resetValue := func(number int) {
+		// reset the digit of `checklist`
+		checklist[number] = false
+	}
+	var executeOrDelegate func(pos int)
+	executeOrDelegate = func(pos int) {
+		// at the most right digit, call back the function
+		if pos == k-1 {
+			f(pattern)
+			return
+		}
+
+		// enumerate the numbers of the right digit
+		for num := n - 1; num >= 0; num-- {
+			// skip if the number of `num` is used
+			if checklist[num] {
+				continue
+			}
+
+			// push stack items for the right digit
+			numFrozen := num
+			operationStack = append(operationStack,
+				func() {
+					resetValue(numFrozen)
+				},
+				func() {
+					executeOrDelegate(pos + 1)
+				},
+				func() {
+					reflectValue(pos+1, numFrozen)
+				}) // push
+		}
+	}
+
+	operationStack[0] = func() {
+		executeOrDelegate(-1)
+	}
+	for len(operationStack) > 0 {
+		operation := operationStack[len(operationStack)-1]      // pop(peek)
+		operationStack = operationStack[:len(operationStack)-1] // pop(discard)
+		operation()
+	}
+}
+
 // PermutationsWithCarrying0 decides the next digit of permutation
 // to increment not by a stack or recursive calls but by the previous
 // permutation directly.
